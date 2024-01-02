@@ -13,7 +13,7 @@ square2_size = min(width // (8), height // (8))
 
 # Load images
 icon = pygame.image.load("./image/icon1.png")
-
+dot_icon = pygame.image.load("./image/d_dot.jpg")
 
 # Set the title and the icon
 pygame.display.set_caption("Chess")
@@ -46,3 +46,17 @@ def piece_display(board_pieces):
             screen.blit(each.p_icon, (pawn_x, pawn_y))
             # Update the display:
             pygame.display.flip()
+
+
+def valid_moves_display(list_of_moves):
+    ''' print pieces in the board:'''
+
+    # access the pieces and print at position for each piece
+    for each in list_of_moves:
+        pawn_x = each[0] * square_size + 30
+        pawn_y = each[1] * square_size + 30
+
+        screen.blit(dot_icon, (pawn_x, pawn_y))
+        # Update the display:
+        pygame.display.flip()
+

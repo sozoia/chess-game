@@ -2,36 +2,28 @@ from my_classes import *
 from display import *
 
 
-def valid_moves_display(list_of_moves):
-    ''' print pieces in the board:'''
-
-    # access the pieces and print at position for each piece
-    for board_piece in list_of_moves:
-        for each in board_piece:
-            pawn_x = each.pos[0] * square_size + 8
-            pawn_y = each.pos[1] * square_size + 13
-
-            screen.blit(each.p_icon, (pawn_x, pawn_y))
-            # Update the display:
-            pygame.display.flip()
-
-
-def choose_piese_to_play(x,y):
+def choose_piese_to_play(x,y,turn):
     '''after the piece choosed ask for new pos'''
 
     ind = get_piece_at((x,y))
     new_pos_choosed = False
     running = True
     click_count = 0
-
+    
     if not ind:
         return False
 
+    choosed = board_pieces[ind[0]][ind[1]].color
+
     print(f"choose the new pos for {board_pieces[ind[0]][ind[1]].color}", end="")
     print(f" team at {board_pieces[ind[0]][ind[1]].pos}")
+    if choosed == turn[0]:
+        valid_moves_display(board_pieces[ind[0]][ind[1]].possible_moves())
+    else:
+        return False
 
     while running:
-        
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -43,6 +35,10 @@ def choose_piese_to_play(x,y):
 
         if click_count >= 2 or new_pos_choosed:
             if new_pos_choosed:
+                if choosed == "white":
+                    turn[0] = "black"
+                else:
+                    turn[0] = "white"
                 return True
             elif not new_pos_choosed:
                 '''didn't choose or not valid choise'''
@@ -51,11 +47,11 @@ def choose_piese_to_play(x,y):
     pygame.quit()
 
 
-
 def main():
 
     # enter loop and track the game
     running = True
+    turn = ["white"]
 
     board()
     piece_display(board_pieces)
@@ -69,7 +65,7 @@ def main():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_x, mouse_y = pygame.mouse.get_pos()
                 print(f"Left mouse button clicked at ({mouse_x // 75}, {mouse_y // 75})")
-                choose_piese_to_play(mouse_x // 75, mouse_y // 75)
+                choose_piese_to_play(mouse_x // 75, mouse_y // 75, turn)
                 board()
                 piece_display(board_pieces)
 

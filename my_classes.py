@@ -13,68 +13,78 @@ class piece:
 class pawn(piece):
 
     def move(self, x, y):
+        '''X and Y are the current position'''
         X, Y = self.pos
+        i = 1
 
         if not isinstance(x, int) or not isinstance(y, int):
             return False
-        if self.color is "white":
+        elif self.color is "white":
             '''so that it go in the oppset dirction'''
-            x *= -1
-            y *= -1
+            i *= -1
+            i *= -1
+        passed = True
+        pos_mov = self.possible_moves()
 
-        # Check for eating positions
-        if  (valide_move((X + 1, Y + 1) != True) and x == X+1 and y == Y+1):
-            self.pos = (x, y)
-            self.first_move = False
-            return True
-        elif not valide_move((X - 1, Y + 1)) and  x == X-1 and y == Y+1:
-            self.pos = (x, y)
-            self.first_move = False
-            return True
+        if (x,y) in pos_mov:
 
-        if (x != X):
-            return False
-        elif (y - Y == 2 and self.first_move):
-            self.pos = (x,y)
-            self.first_move = False
-            return True
+            # first two statment Check for eating positions
+            if valide_move((X+i,Y+i)) == False and (x == X+i and y == Y+i):
+                passed = True
+            elif valide_move((X-i,Y+i)) == False and (x == X-i and y == Y+i):
+                passed = True
+            elif valide_move((x,y)) == False:
+                '''check if there is already piece at new pos'''
+                passed = False
+            elif (y-Y == 2 and self.first_move == False):
+                ''' if pawn already moved before it can't move 2 steps again '''
+                passed = False
 
-        elif (y < Y):
-            return False
-        elif (y > Y and y - Y == 1):
-            self.pos = (x, y)
-            self.first_move = False
-            return True
+            if passed:
+                self.pos = (x,y)
+                self.first_move = False
+            return passed
+
         return False
 
     def possible_moves(self):
-        '''all valid moves for pawn '''
-
+        '''all possible moves for pawn '''
         X,Y = self.pos
-        valid = []
-
-        valid.append((X,Y+1))
-        valid.append(X,Y+1)
-        valid.append(X+1,Y+1)
-        valid.append(X-1,Y+1)
-        return valid
-    
-
+        w_valid = [(X,Y-1),(X,Y-1),(X-1,Y-1),(X+1,Y-1),(X,Y-2)]
+        b_valid = [(X,Y+1),(X,Y+1),(X+1,Y+1),(X-1,Y+1),(X,Y+2)]
+        return w_valid if self.color == "white" else b_valid
 
 
 class queen(piece):
 
-    def move():
-        return(True)
+    def move(self):
+        pass
+    def possible_moves(self):
+        pass
 
 class king(piece):
-    pass
+    def move(self):
+        pass
+    def possible_moves(self):
+        pass
+
 class bishop(piece):
-    pass
+    def move(self):
+        pass
+    def possible_moves(self):
+        pass
+
 class knight(piece):
-    pass
+    def move(self):
+        pass
+    def possible_moves(self):
+        pass
+
 class rock(piece):
-    pass
+    def move(self):
+        pass
+    def possible_moves(self):
+        pass
 
 
 # add pieces images:
