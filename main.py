@@ -11,7 +11,7 @@ def choose_piese_to_play(x,y,turn):
     click_count = 0
     
     if not ind:
-        return False
+        return
 
     choosed = board_pieces[ind[0]][ind[1]].color
 
