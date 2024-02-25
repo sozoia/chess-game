@@ -53,7 +53,13 @@ class pawn(piece):
         X,Y = self.pos
         w_valid = [(X,Y-1),(X,Y-1),(X-1,Y-1),(X+1,Y-1),(X,Y-2)]
         b_valid = [(X,Y+1),(X,Y+1),(X+1,Y+1),(X-1,Y+1),(X,Y+2)]
-        return w_valid if self.color == "white" else b_valid
+
+        if self.color is "white":
+            W = [x for x in w_valid if valide_move(x) is True or board_pieces[get_piece_at(x)].color == "black"]
+        else:    
+            W = [x for x in b_valid if valide_move(x) is True or board_pieces[get_piece_at(x)].color == "white"]
+
+        return W 
 
 
 class queen(piece):
