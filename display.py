@@ -38,20 +38,20 @@ def piece_display(board_pieces):
     ''' print pieces in the board:'''
 
     # access the pieces and print at position for each piece
+    # each board_piece is a list of pieces of the same color and type
     for board_piece in board_pieces:
         for each in board_piece:
             pawn_x = each.pos[0] * square_size + 8
             pawn_y = each.pos[1] * square_size + 13
 
-            screen.blit(each.p_icon, (pawn_x, pawn_y))
-            # Update the display:
-            pygame.display.flip()
+            screen.blit(each.p_icon, (pawn_x, pawn_y))  # draw the piece
+            pygame.display.flip() # Update the display
 
 
 def valid_moves_display(list_of_moves):
-    ''' print pieces in the board:'''
+    ''' print dots of the valid moves of chosed piece:'''
 
-    # access the pieces and print at position for each piece
+    # access the postions and print a dot at each position
     for each in list_of_moves:
         pawn_x = each[0] * square_size + 30
         pawn_y = each[1] * square_size + 30
@@ -59,4 +59,3 @@ def valid_moves_display(list_of_moves):
         screen.blit(dot_icon, (pawn_x, pawn_y))
         # Update the display:
         pygame.display.flip()
-

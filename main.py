@@ -1,4 +1,4 @@
-from my_classes import *
+from my_classes import board_pieces, valid_moves_display, get_piece_at
 from display import *
 
 
@@ -53,19 +53,21 @@ def main():
     running = True
     turn = ["white"]
 
-    board()
-    piece_display(board_pieces)
+    board() # draw the board
+    piece_display(board_pieces) # draw the pieces
 
     while running:
 
         for event in pygame.event.get():
             ''' check for the reactions of the user and control the game'''
             if event.type == pygame.QUIT:
-                running = False
+                running = False # end the loop if the user closes the window
             elif event.type == pygame.MOUSEBUTTONDOWN:
+                # get the position of the mouse click:
                 mouse_x, mouse_y = pygame.mouse.get_pos()
-                print(f"Left mouse button clicked at ({mouse_x // 75}, {mouse_y // 75})")
-                choose_piese_to_play(mouse_x // 75, mouse_y // 75, turn)
+
+                # print(f"Left mouse button clicked at ({mouse_x // 75}, {mouse_y // 75})")
+                choose_piese_to_play(mouse_x // 75, mouse_y // 75, turn)    # if the user clicked on a piece, ask for new pos
                 board()
                 piece_display(board_pieces)
 
