@@ -1,6 +1,6 @@
 # chess game
 
-the "chess game" project is a simple chess game that can be played by two players on the same computer.
+the "chess game" project is a compleete chess game that can be played by two players on the same computer.
 the game is written in python language and i applied the object oriented programming concepts to create the game.
 i used pygame module to create the GUI.
 
