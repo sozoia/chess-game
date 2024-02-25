@@ -20,6 +20,6 @@ if you dont have it installed you can install it using this command:
 pip install pygame
 ```
 3. start the game by running the `chess.py` file using this command:
-   ```
-python chess.py
-    ```
+```
+python main.py
+```
